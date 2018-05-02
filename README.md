@@ -10,5 +10,5 @@ npm install
 Run:
 node index.js
 
-It will start a microservice for you. You can then send a REST request to use it.
+It will start a microservice on port 3011 for you. You can then send a REST request to use it.
 
