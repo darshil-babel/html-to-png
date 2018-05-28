@@ -12,10 +12,11 @@ const createScreenShot = async function(url, filename) {
   await page.goto(url, { waitUntil: "networkidle0" });
   await page.screenshot({ path: "public/" + filename });
   await browser.close();
+  return filename;
 }
 
-app.get('/convert-html-to-png', function(req, res, next) {
-  filename = crypto.createHash('md5').update(req.query.url).digest('hex') + ".png";
+app.get('/convert-html-to-png', function(req, res) {
+  let filename = crypto.createHash('md5').update(req.query.url).digest('hex') + ".png";
   let result = createScreenShot(req.query.url, filename).then(function() {
     var options = {
       root: __dirname + '/public/',
@@ -23,7 +24,8 @@ app.get('/convert-html-to-png', function(req, res, next) {
 
     res.sendFile(filename, options, function(err) {
       if (err) {
-        next(err);
+   	console.log("Error:" + err);
+        res.status(500).send(err);
       } else {
         fs.unlinkSync(__dirname + '/public/' + filename);
       }
