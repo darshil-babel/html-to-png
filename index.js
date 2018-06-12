@@ -10,7 +10,13 @@ const createScreenShot = async function(url, filename) {
   const page = await browser.newPage();
   console.log(url);
   await page.goto(url, { waitUntil: "networkidle0" });
-  await page.screenshot({ path: "public/" + filename });
+  var clip = {
+        x: 0,
+        y: 0,
+        width: 1366,
+        height: 768
+  }  
+    await page.screenshot({ path: "public/" + filename, clip: clip });
   await browser.close();
   return filename;
 }
