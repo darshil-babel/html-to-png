@@ -13,7 +13,7 @@ const createScreenShot = async function(url, filename) {
   var clip = {
         x: 0,
         y: 0,
-        width: 1366,
+        width: 1080,
         height: 768
   }  
     await page.screenshot({ path: "public/" + filename, clip: clip });
