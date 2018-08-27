@@ -10,7 +10,7 @@ const createScreenShot = async function(url) {
   const page = await browser.newPage();
   console.log(url);
   page.on('console', msg => console.log('PAGE LOG:', msg.text()));
-  await page.setViewport({ width: 1366, height: 768});
+  await page.setViewport({ width: 1080, height: 768});
   await page.goto(url, { waitUntil: "networkidle0" });
   await page.addScriptTag({url: 'https://s3-ap-southeast-1.amazonaws.com/ajstatic.in/html2canvas.min.js'}).then(()=>{
     console.log("Script Added");
